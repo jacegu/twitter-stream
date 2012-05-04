@@ -211,7 +211,7 @@ module Twitter
       rescue Exception => e
         receive_error("#{e.class}: " + [e.message, e.backtrace].flatten.join("\n\t"))
         close_connection
-        return
+        raise
       end
     end
 

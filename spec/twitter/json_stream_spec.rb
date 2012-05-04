@@ -134,6 +134,14 @@ describe JSONStream do
       end
     end
 
+    it "should notify exceptions when delivering items" do
+      expect do
+        connect_stream :ssl => false do
+          stream.each_item { |item| raise RuntimeError, 'error message' }
+        end
+      end.to raise_error RuntimeError, 'error message'
+    end
+
     it "should send correct user agent" do
       connect_stream
     end
